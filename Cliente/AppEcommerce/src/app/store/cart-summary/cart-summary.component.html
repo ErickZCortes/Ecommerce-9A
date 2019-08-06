@@ -1,0 +1,14 @@
+<div class="pull-xs-rigth">
+  <small style="color: white;">
+    <span *ngIf="cart.itemCount > 0">
+      {{cart.itemCount}} item (s)
+      {{cart.cartPrice|currency:'MXN':true:'2.2-2'}}
+    </span>
+    <span *ngIf="cart.itemCount == 0">
+      (empty)
+    </span>
+    <button class="btn btn-outline-warning" [disabled]="cart.itemCount == 0">
+      <i class="fa fa-cart-arrow-down"></i>
+    </button>
+  </small>
+</div>
