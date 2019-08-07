@@ -18,7 +18,6 @@ export class ProductRepositoryService {
       this.categories = response['products'].map(p => p.productLine).filter((c, index, array) => array.indexOf(c) === index).sort();
       this.scales = response['products'].map(p => p.productScale).filter((c, index, array) => array.indexOf(c) === index).sort();
       this.vendors = response['products'].map(p => p.productVendor).filter((c, index, array) => array.indexOf(c) === index).sort();
-      console.log(this.categories);
     });
    }
 

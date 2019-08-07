@@ -1,6 +1,6 @@
 export class Product {
     constructor(
-        public productoCode: string,
+        public productCode: string,
         public productName: string,
         public productLine: string,
         public productScale: string,

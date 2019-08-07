@@ -10,60 +10,63 @@ import { Cart } from '../model/cart';
 })
 export class StoreComponent implements OnInit {
   public selectedCategory = null;
-  public productsperPage=12;
-  public selectedPage=1;
+  public productsperPage = 12;
+  public selectedPage = 1;
   public selectedSecale = null;
   public selectedVendor = null;
   constructor(private productRepoService: ProductRepositoryService, public cart: Cart) { }
 
   ngOnInit() {
-   // console.log(this.productRepoService.getProducts());
+    // console.log(this.productRepoService.getProducts());
   }
 
-  get products():Product[]{
-    const pageIndex =(this.selectedPage-1)*this.productsperPage;
-    return this.productRepoService.getProducts(this.selectedCategory,this.selectedSecale,this.selectedVendor)
-    .slice(pageIndex, pageIndex+this.productsperPage);
+  get products(): Product[] {
+    const pageIndex = (this.selectedPage - 1) * this.productsperPage;
+    return this.productRepoService.getProducts(this.selectedCategory, this.selectedSecale, this.selectedVendor)
+      .slice(pageIndex, pageIndex + this.productsperPage);
   }
 
-  get categories(): string[]{
+  get categories(): string[] {
     return this.productRepoService.getCategories();
   }
 
-  changeCategory(newCategory?: string){
+  changeCategory(newCategory?: string) {
     this.selectedPage = 1;
     this.selectedCategory = newCategory;
   }
 
-  get pageNumbers(): number[]{
+  get pageNumbers(): number[] {
     return Array(Math.ceil(this.productRepoService.getProducts(this.selectedCategory)
-    .length/ this.productsperPage)).fill(0).map((x,i) => i+1);
+      .length / this.productsperPage)).fill(0).map((x, i) => i + 1);
   }
 
-  changePage(newNumber: number){
+  changePage(newNumber: number) {
     this.selectedPage = newNumber;
   }
 
-  changePageSize(newSize: number){
+  changePageSize(newSize: number) {
     this.productsperPage = newSize;
     this.changePage(1);
   }
-//////////////////////////////////////////////////////////////////
-  get scales(): string[]{
+
+  get scales(): string[] {
     return this.productRepoService.getScales();
   }
 
-  changeScale(newScale?: string){
+  changeScale(newScale?: string) {
     this.selectedPage = 1;
     this.selectedSecale = newScale;
   }
-  ///////////////////////////////////////////////////////////////
-    get vendors(): string[]{
+
+  get vendors(): string[] {
     return this.productRepoService.getVendors();
   }
 
-  changeVendor(newVendor?: string){
+  changeVendor(newVendor?: string) {
     this.selectedPage = 1;
     this.selectedVendor = newVendor;
+  }
+  addToCart(product: Product){
+    this.cart.addToCart(product);
   }
 }

@@ -8,17 +8,22 @@ import { Cart } from '../model/cart';
 import { CartComponent } from './cart/cart.component';
 import { CheckoutComponent } from './checkout/checkout.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { HttpClientModule } from '@angular/common/http';
+import { RouterModule } from '@angular/router';
+import { Storeguard } from '../storeguard';
 
 @NgModule({
   declarations: [StoreComponent, NavComponent, FooterComponent, CartSummaryComponent, CartComponent, CheckoutComponent, PageNotFoundComponent],
   imports: [
-    CommonModule
+    CommonModule,
+    HttpClientModule,
+    RouterModule
   ],
   exports: [
     StoreComponent
   ],
   providers:[
-    Cart
+    Cart, Storeguard
   ]
 })
 export class StoreModule { }

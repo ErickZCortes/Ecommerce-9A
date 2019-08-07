@@ -4,17 +4,19 @@ import { StoreComponent } from './store/store.component';
 import { CartComponent } from './store/cart/cart.component';
 import { CheckoutComponent } from './store/checkout/checkout.component';
 import { PageNotFoundComponent } from './store/page-not-found/page-not-found.component';
+import { Storeguard } from './storeguard';
 
 const routes: Routes = [
-  {path: 'store', component: StoreComponent},
-  {path: 'cart', component: CartComponent},
-  {path: 'checkout', component: CheckoutComponent},
+  {path: 'store', component: StoreComponent,canActivate:[Storeguard]},
+  { path: 'cart', component: CartComponent, canActivate: [Storeguard]},
+  { path: 'checkout', component: CheckoutComponent, canActivate: [Storeguard]},
   {path: '', redirectTo: '/store', pathMatch: 'full'},
   {path: '**', component: PageNotFoundComponent}
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
+  providers: [Storeguard]
 })
 export class AppRoutingModule { }

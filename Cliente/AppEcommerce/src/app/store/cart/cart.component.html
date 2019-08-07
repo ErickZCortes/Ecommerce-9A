@@ -2,9 +2,12 @@
 
 <section>
     <div class="container">
+        <br>
         <h1>Shopping Cart</h1>
+        <hr>
+        <br>
         <div>
-            <table class="table table-bordered table-hover">
+            <table class="table table-bordered">
                 <thead class="thead-dark">
                     <tr>
                         <th scope="col">Product</th>
@@ -15,94 +18,38 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td class="cart_product">
-                            <div class="container">
-                                <div class="row">
-                                    <div class="col-xs">
-                                        <a href="#"><img class="" style="width: 50%; height: 50%;"
-                                                src="http://placehold.it/100x100" alt=""></a>
-                                    </div>
-                                    <div class="col-xs">
-                                        <h6><a href="">Colorblock Scuba</a></h6>
-                                        <p>Web ID: 1089772</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </td>
-                        <td class="cart_price">
-                            <p>$59</p>
-                        </td>
-                        <td class="cart_quantity">
-                            <div class="cart_quantity_button">
-                                <input type="number" value="1">
-                            </div>
-                        </td>
-                        <td class="cart_total">
-                            <p>$59</p>
-                        </td>
-                        <td class="cart_delete">
-                            <button class="btn btn-outline-danger btn-lg" href=""><i class="fa fa-trash-o"></i></button>
-                        </td>
+                    <tr *ngIf="cart.lines.length == 0">
+                        <td colspan="5">YOUR CART IS EMPTY</td>
                     </tr>
-                    <tr>
+                    <tr *ngFor="let line of cart.lines">
                         <td class="cart_product">
                             <div class="container">
                                 <div class="row">
                                     <div class="col-xs">
-                                        <a href="#"><img class="" style="width: 50%; height: 50%;"
-                                                src="http://placehold.it/100x100" alt=""></a>
+                                        <img class="" style="width: 50%; height: 50%;" src="http://placehold.it/100x100"
+                                            alt="">
                                     </div>
                                     <div class="col-xs">
-                                        <h6><a href="">Colorblock Scuba</a></h6>
-                                        <p>Web ID: 1089772</p>
+                                        <h6>{{line.product.productName}}</h6>
                                     </div>
                                 </div>
                             </div>
                         </td>
                         <td class="cart_price">
-                            <p>$59</p>
+                            {{line.product.MSRP | currency: "USD": true:  "2.2-2"}}
                         </td>
                         <td class="cart_quantity">
-                            <div class="cart_quantity_button">
-                                <input type="number" value="1">
+                            <div>
+                                <input id="quantity" type="number" [value]="line.quantity"
+                                    (change)="updateQuantity(line.product, $event.target.value)">
                             </div>
                         </td>
                         <td class="cart_total">
-                            <p>$59</p>
+                            {{line.lineTotal | currency: "USD": true:  "2.2-2"}}
                         </td>
                         <td class="cart_delete">
-                            <button class="btn btn-outline-danger btn-lg" href=""><i class="fa fa-trash-o"></i></button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="cart_product">
-                            <div class="container">
-                                <div class="row">
-                                    <div class="col-xs">
-                                        <a href="#"><img class="" style="width: 50%; height: 50%;"
-                                                src="http://placehold.it/100x100" alt=""></a>
-                                    </div>
-                                    <div class="col-xs">
-                                        <h6><a href="">Colorblock Scuba</a></h6>
-                                        <p>Web ID: 1089772</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </td>
-                        <td class="cart_price">
-                            <p>$59</p>
-                        </td>
-                        <td class="cart_quantity">
-                            <div class="cart_quantity_button">
-                                <input type="number" value="1">
-                            </div>
-                        </td>
-                        <td class="cart_total">
-                            <p>$59</p>
-                        </td>
-                        <td class="cart_delete">
-                            <button class="btn btn-outline-danger btn-lg" href=""><i class="fa fa-trash-o"></i></button>
+                            <button class="btn btn-danger btn-sm" (click)="deleteLine(line.product.productCode)"><i
+                                    class="fa fa-trash-o"></i></button>
                         </td>
                     </tr>
                 </tbody>
@@ -118,13 +65,45 @@
             <div class="col-sm-6">
             </div>
             <div class="col-sm-6" style="text-align: center;">
-                <div class="totals_item">
-                    <ul>
-                        <p>Cart Sub Total <span>$59</span></p>
-                        <p>Shipping Cost <span>Free</span></p>
-                        <h4>Total <span class="badge badge-secondary">$$$</span></h4>
-                    </ul>
-                    <a class="btn btn-warning btn-sm" href="">Check Out</a>
+
+                <div class="cart_summary" role="tablist">
+                    <h3 class="summary title">SUMMARY</h3>
+                    <div class="cart-totals">
+                        <table class="data table totals">
+                            <tbody>
+                                <tr>
+                                    <th class="totals sub">
+                                        <p>Cart Sub Total</p>
+                                    </th>
+                                    <td>
+                                        <span class="price"
+                                            data-th="Subtotal">{{cart.cartPrice | currency: "USD": true:  "2.2-2"}}</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th class="shipcost">
+                                        <p>Shipping Cost</p>
+                                    </th>
+                                    <td>
+                                        <span>Free</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th class="total">
+                                        <h5>Total</h5>
+                                    </th>
+                                    <td>
+                                        <span>{{cart.cartPrice | currency: "USD": true:  "2.2-2"}}</span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                        <button type="button" class="btn btn-primary btn-sm" routerLink="/store">Continue Shopping</button> 
+                        <button  type="button" class="btn btn-warning btn-sm" routerLink="/checkout">Check Out</button>
+                    </div>
+                    <br>
                 </div>
             </div>
         </div>
