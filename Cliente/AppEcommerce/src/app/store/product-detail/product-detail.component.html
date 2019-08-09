@@ -19,10 +19,12 @@
                     <span class="text-warning">&#9733; &#9733; &#9733; &#9733; &#9734;</span>
                     4.0 stars
                     <hr>
-                    <button type="button" class="btn btn-primary" routerLink="/store"><i
-                            class="fa fa-undo"></i>BACK</button>
-                    <button type="button" class="btn btn-warning"><i class="fa fa-shopping-cart"></i> ADD TO
-                        CART</button>
+                    <div>
+                        <button type="button" class="btn btn-primary" style="margin-left: 47px;" routerLink="/store"><i
+                                class="fa fa-undo"></i>BACK</button>
+                        <button type="button" class="btn btn-warning" style="margin-left: 50px;"><i class="fa fa-shopping-cart"></i> ADD TO
+                            CART</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -30,7 +32,7 @@
 </section>
 <section>
     <br>
-    <div class="container">
+    <div class="container" *ngIf="product$ | async as product">
         <div class="row">
             <div class="col-12">
                 <div class="tabbable">
@@ -49,19 +51,19 @@
                                     <tbody>
                                         <tr>
                                             <th scope="row">Product Line</th>
-                                            <td></td>
+                                            <td>{{product.productLine}}</td>
                                         </tr>
                                         <tr>
                                             <th scope="row">Product Scale</th>
-                                            <td></td>
+                                            <td>{{product.productScale}}</td>
                                         </tr>
                                         <tr>
                                             <th scope="row">Product Vendor</th>
-                                            <td></td>
+                                            <td>{{product.productVendor}}</td>
                                         </tr>
                                         <tr>
                                             <th scope="row">Stock</th>
-                                            <td></td>
+                                            <td>{{product.quantityInStock}}</td>
                                         </tr>
                                     </tbody>
                                 </table>
