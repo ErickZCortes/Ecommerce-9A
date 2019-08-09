@@ -1,9 +1,7 @@
 <app-nav></app-nav>
 <!-- Page Content -->
 <div class="container">
-
   <div class="row">
-
     <div class="col-lg-3">
       <h1 class="my-3">Shop Name</h1>
       <button href="#" class="btn btn-light btn-lg btn-block"
@@ -60,7 +58,7 @@
             <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
             <div class="card-body">
               <h4 class="card-title">
-                <a href="#">{{product.productName}}</a>
+                <a [routerLink]="['/product',product.productCode]">{{product.productName}}</a>
               </h4>
               <span class="badge badge-success">
                 {{product.MSRP|currency:'MXN'}}
@@ -68,8 +66,8 @@
               <p class="card-text">{{product.productDescription|slice:0:130}}</p>
             </div>
             <div class="card-footer">
-              <button class="btn btn-warning btn-sm btn-block" style="position:center"
-                (click)="addToCart(product)"><i class="fa fa-shopping-cart"></i> Add to cart</button>
+              <button class="btn btn-warning btn-sm btn-block" style="position:center" (click)="addToCart(product)"><i
+                  class="fa fa-shopping-cart"></i> Add to cart</button>
             </div>
           </div>
         </div>
@@ -81,7 +79,7 @@
         <nav aria-label="..." class="pull-xs-right">
           <ul class="pagination pagination-smm">
             <li class="page-item" [class.active]="page == selectedPage" *ngFor="let page of pageNumbers">
-              <a class="page-link" href="#" (click)="changePage(page)">{{page}}</a>
+              <a class="page-link" (click)="changePage(page)">{{page}}</a>
             </li>
           </ul>
         </nav>

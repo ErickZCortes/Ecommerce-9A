@@ -1,0 +1,103 @@
+<app-nav></app-nav>
+
+<section>
+    <div class="container" *ngIf="product$ | async as product">
+        <br>
+        <div class="row">
+            <div class="col-8">
+                <img class="card-img-top" src="http://placehold.it/700x400" alt="Img-product">
+            </div>
+            <div class="col-4">
+                <div>
+                    <h2>{{product.productName}}</h2>
+                    <div>
+                        <h4 class="price">{{product.MSRP|currency:'MXN'}}</h4>
+                    </div>
+                    <p>
+                        {{product.productDescription}}
+                    </p>
+                    <span class="text-warning">&#9733; &#9733; &#9733; &#9733; &#9734;</span>
+                    4.0 stars
+                    <hr>
+                    <button type="button" class="btn btn-primary" routerLink="/store"><i
+                            class="fa fa-undo"></i>BACK</button>
+                    <button type="button" class="btn btn-warning"><i class="fa fa-shopping-cart"></i> ADD TO
+                        CART</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section>
+    <br>
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="tabbable">
+                    <ul class="nav nav-tabs">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="#tab1" data-toggle="tab">Product Details</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#tab2" data-toggle="tab">Product Reviews</a>
+                        </li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="tab1">
+                            <div class="card-body">
+                                <table class="table table-borderless table-sm">
+                                    <tbody>
+                                        <tr>
+                                            <th scope="row">Product Line</th>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">Product Scale</th>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">Product Vendor</th>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">Stock</th>
+                                            <td></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="tab2">
+                            <div class="card-body">
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis et enim aperiam
+                                    inventore, similique
+                                    necessitatibus neque non! Doloribus, modi sapiente laboriosam aperiam fugiat
+                                    laborum. Sequi mollitia,
+                                    necessitatibus quae sint natus.</p>
+                                <small class="text-muted">Posted by Anonymous on 3/1/17</small>
+                                <hr>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis et enim aperiam
+                                    inventore, similique
+                                    necessitatibus neque non! Doloribus, modi sapiente laboriosam aperiam fugiat
+                                    laborum. Sequi mollitia,
+                                    necessitatibus quae sint natus.</p>
+                                <small class="text-muted">Posted by Anonymous on 3/1/17</small>
+                                <hr>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis et enim aperiam
+                                    inventore, similique
+                                    necessitatibus neque non! Doloribus, modi sapiente laboriosam aperiam fugiat
+                                    laborum. Sequi mollitia,
+                                    necessitatibus quae sint natus.</p>
+                                <small class="text-muted">Posted by Anonymous on 3/1/17</small>
+                                <hr>
+                                <a href="#" class="btn btn-success">Leave a Review</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>
+<app-footer></app-footer>
