@@ -1,6 +1,47 @@
 <?php
     namespace app\Models;
     class OrderModel extends Models{
+        public function selectOrders(){
+                $query = $this->db->pdo->prepare(
+                    'SELECT 
+                    orders.`orderNumber`, 
+                    orders.`orderDate`, 
+                    orders.`requiredDate`, 
+                    orders.`shippedDate`, 
+                    orders.`status`, 
+                    orders.`comments`, 
+                    orders.`customerNumber`,
+                    orderdetails.`orderNumber`, 
+                    orderdetails.`productCode`, 
+                    orderdetails.`quantityOrdered`, 
+                    orderdetails.`priceEach`, 
+                    orderdetails.`orderLineNumber`
+                    FROM 
+                    orders INNER JOIN  orderdetails ON orders.`orderNumber` = orderdetails.`orderNumber`'
+                );
+                
+        
+                if(!$query->execute()){
+                    return array(
+                        'sucess' => false,
+                        'description' => $query->errorInfo()
+                    
+                    );
+                }else{
+                    $result = $query -> fetchAll(\ PDO::FETCH_ASSOC);
+                    return array(
+                        'sucess' => true,
+                        'description' => 'The orders were found',
+                        'orders' => $result
+                    );
+                }
+        
+                return array(
+                    'sucess' => true,
+                    'description' => 'The orders were found',
+                    'orders' => $result
+                );
+            }
         public function insertOrder($order){
             $orderNumber = time();
             $lines = $order['cart']['lines'];

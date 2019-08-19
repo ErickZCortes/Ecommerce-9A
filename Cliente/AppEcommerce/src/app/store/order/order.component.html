@@ -1,0 +1,46 @@
+<nav class="navbar fixed-top navbar-dark bg-dark">
+    <a class="navbar-brand" href="/order">App Ecommerce</a>
+    <ul class="navbar-nav px-3">
+        <li class="nav-item text-nowrap">
+            <a class="nav-link">Sign out</a>
+        </li>
+    </ul>
+</nav>
+<div class="container-fluid">
+    <div class="row">
+        <main role="main" class="col-md-12">
+            <br>
+            <h2>Orders</h2>
+            <hr>
+            <br>
+            <div class="table-responsive">
+                <table class="table table-sm">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>Order Number</th>
+                            <th>Date</th>
+                            <th>Status</th>
+                            <th>Comments</th>
+                            <th>Customer Number</th>
+                            <th>Product Code</th>
+                            <th>Quantity Ordered</th>
+                            <th>Price Each</th>
+                        </tr>
+                    </thead>
+                    <tbody *ngFor="let order of orders">
+                        <tr>
+                            <td>{{order.orderNumber}}</td>
+                            <td>{{order.orderDate| date: 'd/M/y'}}</td>
+                            <td>{{order.status}}</td>
+                            <td>{{order.comments|slice:0:50}}...</td>
+                            <td>{{order.customerNumber}}</td>
+                            <td>{{order.productCode}}</td>
+                            <td>{{order.quantityOrdered}}</td>
+                            <td>{{order.priceEach|currency:'MXN':'symbol-narrow'}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </main>
+    </div>
+</div>

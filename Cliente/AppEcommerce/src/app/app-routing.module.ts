@@ -6,11 +6,13 @@ import { CheckoutComponent } from './store/checkout/checkout.component';
 import { PageNotFoundComponent } from './store/page-not-found/page-not-found.component';
 import { Storeguard } from './storeguard';
 import { ProductDetailComponent } from './store/product-detail/product-detail.component';
+import { OrderComponent } from './store/order/order.component';
 
 const routes: Routes = [
   { path: 'store', component: StoreComponent, canActivate: [Storeguard] },
   { path: 'cart', component: CartComponent, canActivate: [Storeguard] },
   { path: 'checkout', component: CheckoutComponent, canActivate: [Storeguard] },
+  { path: 'order', component: OrderComponent },
   { path: 'product/:id', component: ProductDetailComponent },
   { path: '', redirectTo: '/store', pathMatch: 'full' },
   { path: '**', component: PageNotFoundComponent }
