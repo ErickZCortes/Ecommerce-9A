@@ -12,7 +12,7 @@ const routes: Routes = [
   { path: 'store', component: StoreComponent, canActivate: [Storeguard] },
   { path: 'cart', component: CartComponent, canActivate: [Storeguard] },
   { path: 'checkout', component: CheckoutComponent, canActivate: [Storeguard] },
-  { path: 'order', component: OrderComponent },
+  { path: 'order', component: OrderComponent, canActivate: [Storeguard] },
   { path: 'product/:id', component: ProductDetailComponent },
   { path: '', redirectTo: '/store', pathMatch: 'full' },
   { path: '**', component: PageNotFoundComponent }
